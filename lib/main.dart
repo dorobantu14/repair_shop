@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:repair_shop/core/core.dart';
+import 'package:repair_shop/main_screen/data/shop_data.dart';
+import 'package:repair_shop/main_screen/domain/bloc/shop_bloc.dart';
+import 'package:repair_shop/main_screen/domain/repository/shop_repository.dart';
 
-import 'main_screen/presentation/main_screen.dart';
+import 'package:repair_shop/main_screen/presentation/main_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const RepairShop());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class RepairShop extends StatelessWidget {
+  const RepairShop({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,7 +22,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
         useMaterial3: true,
       ),
-      home: const MainScreen(),
+      home: BlocProvider(
+        create: (_) => ShopBloc(
+          ShopRepository(
+            ShopData(),
+          ),
+        ),
+        child: const MainScreen(),
+      ),
     );
   }
 }

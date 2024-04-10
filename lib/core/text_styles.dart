@@ -2,21 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:repair_shop/core/colors.dart';
 
 abstract class TextStyles {
-  static const boldSubtitleTextStyle = TextStyle(
-    fontSize: 32,
-    fontWeight: FontWeight.bold,
+  static const blackBoldTextStyle = TextStyle(
+    fontSize: 14,
     color: AppColors.text,
+    fontWeight: FontWeight.bold,
   );
 
-  static const normalBoldTextStyle = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.bold,
-    color: AppColors.text,
-  );
 
-  static const blackButtonTextStyle = TextStyle(
-    fontSize: 16,
+
+  static const blackBoldButtonTextStyle = TextStyle(
+    fontSize: 12,
     color: AppColors.text,
+    fontWeight: FontWeight.bold,
   );
 
   static const whiteButtonTextStyle = TextStyle(
@@ -42,6 +39,12 @@ abstract class TextStyles {
 
   static const boldGreyTextStyle = TextStyle(
     fontSize: 18,
+    fontWeight: FontWeight.bold,
+    color: AppColors.lightGrey,
+  );
+
+  static const smallBoldGreyTextStyle = TextStyle(
+    fontSize: 12,
     fontWeight: FontWeight.bold,
     color: AppColors.lightGrey,
   );

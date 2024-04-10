@@ -1,10 +1,10 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:repair_shop/core/core.dart';
+import 'package:repair_shop/core/widgets/stepper.dart';
 import 'package:repair_shop/main_screen/presentation/products_screen.dart';
+import 'package:repair_shop/main_screen/presentation/repair_screen.dart';
 import 'package:repair_shop/main_screen/presentation/schedule_screen.dart';
-import 'package:repair_shop/main_screen/presentation/stepper.dart';
-import 'package:collection/collection.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -16,7 +16,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int activeIndex = 0;
   final steps = <String>[
-    Strings.bidText,
+    Strings.createQuoteText,
     Strings.setTimeText,
   ];
 
@@ -33,17 +33,21 @@ class _MainScreenState extends State<MainScreen> {
         child: Column(
           children: [
             AppDotStepper(
-              dotCount: 2,
+              dotCount: steps.length,
               activeStep: activeIndex,
               steps: _buildSteps(),
             ),
-            stepsContent[activeIndex],
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                if (activeIndex >= steps.length - 1) _getBackButton(),
-                if (activeIndex < steps.length) _getNextButton(),
-              ],
+            Expanded(child: stepsContent[activeIndex]),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Row(
+                children: [
+                  if (activeIndex >= steps.length - 1) _getBackButton(),
+                  const Spacer(),
+                  if (activeIndex < steps.length - 1) _getNextButton(),
+                  if (activeIndex == steps.length - 1) _getCreateButton(),
+                ],
+              ),
             ),
           ],
         ),
@@ -52,18 +56,40 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   List<EasyStep> _buildSteps() {
-    return steps.mapIndexed((index, step) {
-      return EasyStep(
+    return List.generate(
+      steps.length,
+      (index) => EasyStep(
         customStep: Text(
           '${index + 1}',
           style: TextStyles.whiteBoldTextStyle,
         ),
-        customTitle: Text(
-          index == activeIndex ? step : '',
-          style: TextStyles.boldGreyTextStyle,
+        customTitle: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              index == activeIndex ? steps[index] : '',
+              style: TextStyles.boldGreyTextStyle,
+            ),
+          ],
         ),
-      );
-    }).toList();
+      ),
+    );
+  }
+
+  Widget _getCreateButton() {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (context) => const RepairScreen(),
+          ),
+        );
+      },
+      child: const Text(
+        Strings.createText,
+        style: TextStyles.boldGreyTextStyle,
+      ),
+    );
   }
 
   Widget _getNextButton() {

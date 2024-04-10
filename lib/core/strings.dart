@@ -9,7 +9,7 @@ abstract class Strings {
   static const String totalText = 'Total';
   static const String nextText = 'INAINTE';
   static const String backText = 'INAPOI';
-  static const String createText = 'Creeaza';
+  static const String createText = 'CREEAZA';
   static const String setTimeText = 'Stabileste ora';
   static const String tendersText = 'Ofertanti';
   static const String searchTenderText = 'Cauta ofertant';
@@ -17,4 +17,5 @@ abstract class Strings {
   static const String ratingText = 'Rating';
   static const String priceText = 'Pret';
   static const String timeText = 'Timp';
+  static const String noProductsText = 'Nu exista produse adaugate';
 }

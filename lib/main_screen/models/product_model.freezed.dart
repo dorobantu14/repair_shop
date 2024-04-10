@@ -21,7 +21,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ProductModel {
   String get name => throw _privateConstructorUsedError;
-  int get price => throw _privateConstructorUsedError;
+  double get price => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $ProductModelCopyWith<$Res> {
           ProductModel value, $Res Function(ProductModel) then) =
       _$ProductModelCopyWithImpl<$Res, ProductModel>;
   @useResult
-  $Res call({String name, int price});
+  $Res call({String name, double price});
 }
 
 /// @nodoc
@@ -62,7 +62,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ) as $Val);
   }
 }
@@ -75,7 +75,7 @@ abstract class _$$ProductModelImplCopyWith<$Res>
       __$$ProductModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, int price});
+  $Res call({String name, double price});
 }
 
 /// @nodoc
@@ -100,7 +100,7 @@ class __$$ProductModelImplCopyWithImpl<$Res>
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ));
   }
 }
@@ -116,7 +116,7 @@ class _$ProductModelImpl implements _ProductModel {
   @override
   final String name;
   @override
-  final int price;
+  final double price;
 
   @override
   String toString() {
@@ -153,7 +153,7 @@ class _$ProductModelImpl implements _ProductModel {
 abstract class _ProductModel implements ProductModel {
   const factory _ProductModel(
       {required final String name,
-      required final int price}) = _$ProductModelImpl;
+      required final double price}) = _$ProductModelImpl;
 
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
       _$ProductModelImpl.fromJson;
@@ -161,7 +161,7 @@ abstract class _ProductModel implements ProductModel {
   @override
   String get name;
   @override
-  int get price;
+  double get price;
   @override
   @JsonKey(ignore: true)
   _$$ProductModelImplCopyWith<_$ProductModelImpl> get copyWith =>

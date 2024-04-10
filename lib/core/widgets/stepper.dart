@@ -4,18 +4,14 @@ import 'package:repair_shop/core/core.dart';
 
 class AppDotStepper extends StatelessWidget {
   const AppDotStepper({
-    super.key,
     required this.dotCount,
     required this.activeStep,
-    this.tappingEnabled,
-    this.onDotTapped,
     required this.steps,
+    super.key,
   });
 
   final int dotCount;
   final int activeStep;
-  final bool? tappingEnabled;
-  final Function(int)? onDotTapped;
   final List<EasyStep> steps;
 
   @override
@@ -24,10 +20,11 @@ class AppDotStepper extends StatelessWidget {
       activeStep: activeStep,
       steps: steps,
       activeStepBackgroundColor: AppColors.primary,
+      activeStepTextColor: AppColors.lightGrey,
       unreachedStepBackgroundColor: AppColors.lightGrey,
       finishedStepBackgroundColor: AppColors.green,
       defaultStepBorderType: BorderType.normal,
-      lineStyle:  LineStyle(
+      lineStyle: LineStyle(
         lineType: LineType.normal,
         activeLineColor: AppColors.lightGrey,
         defaultLineColor: AppColors.lightGrey,
