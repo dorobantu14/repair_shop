@@ -8,7 +8,10 @@ abstract class TextStyles {
     fontWeight: FontWeight.bold,
   );
 
-
+  static const blackNormalTextStyle = TextStyle(
+    fontSize: 14,
+    color: AppColors.text,
+  );
 
   static const blackBoldButtonTextStyle = TextStyle(
     fontSize: 12,
