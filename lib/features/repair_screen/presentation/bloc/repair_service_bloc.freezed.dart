@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$RepairServiceEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getRepairServices,
+    required TResult Function(bool isInitial) getRepairServices,
     required TResult Function(SortingOption sortingOption) sortRepairServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getRepairServices,
+    TResult? Function(bool isInitial)? getRepairServices,
     TResult? Function(SortingOption sortingOption)? sortRepairServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getRepairServices,
+    TResult Function(bool isInitial)? getRepairServices,
     TResult Function(SortingOption sortingOption)? sortRepairServices,
     required TResult orElse(),
   }) =>
@@ -81,6 +81,8 @@ abstract class _$$GetRepairServicesEventImplCopyWith<$Res> {
           _$GetRepairServicesEventImpl value,
           $Res Function(_$GetRepairServicesEventImpl) then) =
       __$$GetRepairServicesEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isInitial});
 }
 
 /// @nodoc
@@ -91,55 +93,81 @@ class __$$GetRepairServicesEventImplCopyWithImpl<$Res>
       _$GetRepairServicesEventImpl _value,
       $Res Function(_$GetRepairServicesEventImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isInitial = null,
+  }) {
+    return _then(_$GetRepairServicesEventImpl(
+      isInitial: null == isInitial
+          ? _value.isInitial
+          : isInitial // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$GetRepairServicesEventImpl implements _GetRepairServicesEvent {
-  const _$GetRepairServicesEventImpl();
+  const _$GetRepairServicesEventImpl({this.isInitial = false});
+
+  @override
+  @JsonKey()
+  final bool isInitial;
 
   @override
   String toString() {
-    return 'RepairServiceEvent.getRepairServices()';
+    return 'RepairServiceEvent.getRepairServices(isInitial: $isInitial)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetRepairServicesEventImpl);
+            other is _$GetRepairServicesEventImpl &&
+            (identical(other.isInitial, isInitial) ||
+                other.isInitial == isInitial));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, isInitial);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetRepairServicesEventImplCopyWith<_$GetRepairServicesEventImpl>
+      get copyWith => __$$GetRepairServicesEventImplCopyWithImpl<
+          _$GetRepairServicesEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getRepairServices,
+    required TResult Function(bool isInitial) getRepairServices,
     required TResult Function(SortingOption sortingOption) sortRepairServices,
   }) {
-    return getRepairServices();
+    return getRepairServices(isInitial);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getRepairServices,
+    TResult? Function(bool isInitial)? getRepairServices,
     TResult? Function(SortingOption sortingOption)? sortRepairServices,
   }) {
-    return getRepairServices?.call();
+    return getRepairServices?.call(isInitial);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getRepairServices,
+    TResult Function(bool isInitial)? getRepairServices,
     TResult Function(SortingOption sortingOption)? sortRepairServices,
     required TResult orElse(),
   }) {
     if (getRepairServices != null) {
-      return getRepairServices();
+      return getRepairServices(isInitial);
     }
     return orElse();
   }
@@ -178,7 +206,13 @@ class _$GetRepairServicesEventImpl implements _GetRepairServicesEvent {
 }
 
 abstract class _GetRepairServicesEvent implements RepairServiceEvent {
-  const factory _GetRepairServicesEvent() = _$GetRepairServicesEventImpl;
+  const factory _GetRepairServicesEvent({final bool isInitial}) =
+      _$GetRepairServicesEventImpl;
+
+  bool get isInitial;
+  @JsonKey(ignore: true)
+  _$$GetRepairServicesEventImplCopyWith<_$GetRepairServicesEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -250,7 +284,7 @@ class _$SortRepairServicesEventImpl implements _SortRepairServicesEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getRepairServices,
+    required TResult Function(bool isInitial) getRepairServices,
     required TResult Function(SortingOption sortingOption) sortRepairServices,
   }) {
     return sortRepairServices(sortingOption);
@@ -259,7 +293,7 @@ class _$SortRepairServicesEventImpl implements _SortRepairServicesEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getRepairServices,
+    TResult? Function(bool isInitial)? getRepairServices,
     TResult? Function(SortingOption sortingOption)? sortRepairServices,
   }) {
     return sortRepairServices?.call(sortingOption);
@@ -268,7 +302,7 @@ class _$SortRepairServicesEventImpl implements _SortRepairServicesEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getRepairServices,
+    TResult Function(bool isInitial)? getRepairServices,
     TResult Function(SortingOption sortingOption)? sortRepairServices,
     required TResult orElse(),
   }) {

@@ -26,7 +26,9 @@ abstract class Strings {
   static const String noBookedSlotText =
       'Pentru a continua, selecteaza un slot!';
   static const String okText = 'OK';
-  static const String noProductsSelectedText = 'Nu ai selectat niciun produs! '
-      'Pentru a continua, selecteaza cel putin un produs!';
+  static const String noProductsAddedText = 'Nu ai adaugat niciun produs! '
+      'Pentru a continua, adauga cel putin un produs!';
+  static const String noProductSelectedText = 'Nu ai selectat niciun produs! '
+      'Te rugam sa selectezi un produs!';
   static const minutesText = 'minute';
 }

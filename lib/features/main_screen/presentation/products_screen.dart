@@ -82,11 +82,19 @@ class _ProductsScreenState extends State<ProductsScreen> {
   }
 
   void onAddProduct(ShopState state, BuildContext context) {
+    if (selectedProduct == null) {
+      showDialog<void>(
+        context: context,
+        builder: (_) => const _NoProductSelectedError(),
+      );
+      return;
+    }
     _quantityController.text = '1';
     _quantityFocusNode.unfocus();
     final product = state.products.firstWhere(
       (element) => element.name == selectedProduct,
     );
+
     context.read<ShopBloc>().add(
           ShopEvent.addProduct(
             product: AddedProductModel(
@@ -101,6 +109,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
       () {
         quantity = 1;
         shouldClearOnSubmit = true;
+        selectedProduct = null;
       },
     );
   }
@@ -145,6 +154,29 @@ class _NoProductsText extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(Strings.noProductsText),
+        ],
+      ),
+    );
+  }
+}
+
+class _NoProductSelectedError extends StatelessWidget {
+  const _NoProductSelectedError();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 24),
+      child: AlertDialog(
+        title: const Text(Strings.errorText),
+        content: const Text(Strings.noProductSelectedText),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text(Strings.okText),
+          ),
         ],
       ),
     );

@@ -137,6 +137,7 @@ class TimeSlot extends StatelessWidget {
   const TimeSlot({
     required this.time,
     required this.isSlotOccupied,
+    required this.isPastTime,
     super.key,
     this.onTap,
   });
@@ -144,13 +145,14 @@ class TimeSlot extends StatelessWidget {
   final String time;
   final GestureTapCallback? onTap;
   final bool isSlotOccupied;
+  final bool isPastTime;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
       child: GestureDetector(
-        onTap: onTap,
+        onTap: isSlotOccupied || isPastTime ? null : onTap,
         child: Container(
           width: MediaQuery.of(context).size.width * 0.1,
           height: 36,
@@ -249,10 +251,21 @@ class CalendarBody extends StatelessWidget {
                 element.month == day.month &&
                 element.time == time,
           ),
+          isPastTime: isPastTime(day, time),
         ),
       );
     }
     return columns;
+  }
+
+  bool isPastTime(DayModel day, String time) {
+    final currentTime = DateTime.now();
+    final selectedTime = DateTime(
+      int.parse(day.year),
+      int.parse(day.month),
+      int.parse(day.dayDate),
+    );
+    return currentTime.isAfter(selectedTime);
   }
 }
 
@@ -268,24 +281,23 @@ class CalendarHeader extends StatelessWidget {
 
   DateTime get currentDate => DateTime.now();
 
-  String get currentMonthString => DateFormat('MMMM').format(
-        DateTime(
-          currentDate.year,
-          currentMonth,
-        ),
+  DateTime get currentMonthDateTime => DateTime(
+        currentDate.year,
+        currentMonth,
       );
 
-  String get nextMonthString => DateFormat('MMMM').format(
-        DateTime(
-          currentDate.year,
-          currentMonth + 1,
-        ),
+  DateTime get nextMonthDateTime => DateTime(
+        currentDate.year,
+        currentMonth + 1,
       );
 
   String get yearString => currentDate.year.toString();
 
   @override
   Widget build(BuildContext context) {
+    final calendarHeaderText = '${currentMonthDateTime.formattedMonth} - '
+        '${nextMonthDateTime.formattedMonth} '
+        '$yearString';
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -302,10 +314,7 @@ class CalendarHeader extends StatelessWidget {
       child: Row(
         children: [
           const Spacer(),
-          Text(
-            '$currentMonthString - $nextMonthString $yearString',
-            style: TextStyles.blackBoldTextStyle,
-          ),
+          Text(calendarHeaderText, style: TextStyles.blackBoldTextStyle),
           const Spacer(),
           Row(
             children: [

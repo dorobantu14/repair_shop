@@ -26,12 +26,18 @@ class RepairServiceBloc extends Bloc<RepairServiceEvent, RepairServiceState> {
     _GetRepairServicesEvent event,
     Emitter<RepairServiceState> emit,
   ) async {
-    emit(state.copyWith(status: RepairServiceStatus.loading));
     try {
+      if (event.isInitial) {
+        emit(state.copyWith(status: RepairServiceStatus.initialLoading));
+        await Future<void>.delayed(const Duration(seconds: 1));
+      } else {
+        emit(state.copyWith(status: RepairServiceStatus.loading));
+      }
       final services = await _repository.getRepairServices();
       emit(
         state.copyWith(
           status: RepairServiceStatus.success,
+          selectedSortingOption: null,
           repairServices: services,
         ),
       );

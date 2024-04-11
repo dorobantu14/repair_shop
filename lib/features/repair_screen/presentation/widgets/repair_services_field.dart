@@ -6,21 +6,8 @@ import 'package:repair_shop/common/common_widgets.dart';
 import 'package:repair_shop/core/core.dart';
 import 'package:repair_shop/features/repair_screen/presentation/bloc/repair_service_bloc.dart';
 
-class RepairServicesField extends StatefulWidget {
+class RepairServicesField extends StatelessWidget {
   const RepairServicesField({super.key});
-
-  @override
-  State<RepairServicesField> createState() => _RepairServicesFieldState();
-}
-
-class _RepairServicesFieldState extends State<RepairServicesField> {
-  @override
-  void initState() {
-    super.initState();
-    context
-        .read<RepairServiceBloc>()
-        .add(const RepairServiceEvent.getRepairServices());
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +16,10 @@ class _RepairServicesFieldState extends State<RepairServicesField> {
         return SuggestionsField(
           hintText: Strings.searchTenderText,
           onSelected: (_) {},
-          optionsBuilder: _buildServiceOptions,
+          optionsBuilder: (textEditingValue) => _buildServiceOptions(
+            context,
+            textEditingValue: textEditingValue,
+          ),
           suffixIcon: const Icon(Icons.search),
         );
       },
@@ -37,8 +27,9 @@ class _RepairServicesFieldState extends State<RepairServicesField> {
   }
 
   FutureOr<Iterable<String>> _buildServiceOptions(
-    TextEditingValue textEditingValue,
-  ) async {
+    BuildContext context, {
+    required TextEditingValue textEditingValue,
+  }) async {
     final state = context.read<RepairServiceBloc>().state;
     if (textEditingValue.text.isEmpty) {
       return state.repairServices.map((e) => e.name).toList();
