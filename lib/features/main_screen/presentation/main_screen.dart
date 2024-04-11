@@ -127,7 +127,7 @@ class _MainScreenState extends State<MainScreen> {
       context: context,
       builder: (_) => AlertDialog(
         title: const Text(Strings.errorText),
-        content: const Text(Strings.noProductsSelectedText),
+        content: const Text(Strings.noProductsAddedText),
         actions: [
           TextButton(
             onPressed: () {

@@ -11,6 +11,7 @@ class RepairServiceState with _$RepairServiceState {
 
 enum RepairServiceStatus {
   initial,
+  initialLoading,
   loading,
   success,
   failure,
